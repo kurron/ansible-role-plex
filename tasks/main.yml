@@ -1,11 +1,25 @@
 ---
+- name: Create Plex Mount Point
+  become: yes
+  file:
+      path: "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
+      state: directory
+      mode: 0755
+  when: never
+
 - name: Install Plex
   become: yes
   apt:
       deb: "https://downloads.plex.tv/plex-media-server/{{plex_version}}/plexmediaserver_{{plex_version}}_amd64.deb"
       state: present
-  notify: 'restart-plex'
   when: (ansible_distribution == "Ubuntu") and (plex_install)
+
+- name: Install Plex
+  become: yes
+  dnf:
+      name: "https://downloads.plex.tv/plex-media-server/{{plex_version}}/plexmediaserver-{{plex_version}}.x86_64.rpm"
+      state: present
+  when: (ansible_distribution == "Fedora") and (plex_install)
 
 - name: Start Plex
   systemd:
