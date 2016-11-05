@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installation of tools than any self-respecting software developer loves and needs.
+Plex media server.
 
 Requirements
 ------------
@@ -24,7 +24,7 @@ Example Playbook
 ```
 - hosts: servers
   roles:
-      - { role: kurron.software-developer }
+      - { role: kurron.plex }
 ```
 
 License
