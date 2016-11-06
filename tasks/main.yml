@@ -1,12 +1,4 @@
 ---
-- name: Create Plex Mount Point
-  become: yes
-  file:
-      path: "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server"
-      state: directory
-      mode: 0755
-  when: never
-
 - name: Install Plex
   become: yes
   apt:
