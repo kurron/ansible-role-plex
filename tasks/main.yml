@@ -13,6 +13,20 @@
       state: present
   when: (ansible_distribution == "Fedora") and (plex_install)
 
+- name: Use Syslog
+  become: yes
+  lineinfile:
+      dest: /etc/sysconfig/PlexMediaServer
+      line: "export PLEX_MEDIA_SERVER_USE_SYSLOG=true"
+  when: (ansible_distribution == "Fedora") and (plex_install)
+
+- name: Use Syslog
+  become: yes
+  lineinfile:
+      dest: /etc/default/plexmediaserver
+      line: "export PLEX_MEDIA_SERVER_USE_SYSLOG=true"
+  when: (ansible_distribution == "Ubuntu") and (plex_install)
+
 - name: Start Plex
   systemd:
       name: plexmediaserver
